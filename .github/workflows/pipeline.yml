@@ -17,17 +17,18 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      #- name: Install Requirements
-      #  run: pip install -r requirements.txt
+      - name: Install Requirements
+        run: pip install -r requirements.txt
 
       - name: Start
         env:
-          BOT_API: ${{ env.BOT_API }}
-          GEMINI_API: ${{ env.GEMINI_API }}
-          LIMIT_USE: ${{ env.LIMIT_USE }}
-          NGROK_TOKEN: ${{ env.NGROK_TOKEN }}
-          ROW_X_PAGE: ${{ env.ROW_X_PAGE }}
-          VIDEOG_DB: ${{ env.VIDEOG_DB }}
-        run: |
-          echo "env ROW_X_PAGE es ${{ env.ROW_X_PAGE }}"
-          echo "vars ROW_X_PAGE es ${{ vars.ROW_X_PAGE }}"
+          BOT_API: ${{ vars.BOT_API }}
+          GEMINI_API: ${{ vars.GEMINI_API }}
+          LIMIT_USE: ${{ vars.LIMIT_USE }}
+          NGROK_TOKEN: ${{ vars.NGROK_TOKEN }}
+          ROW_X_PAGE: ${{ vars.ROW_X_PAGE }}
+          VIDEOG_DB: ${{ vars.VIDEOG_DB }}
+        #run: |
+        #  echo "env ROW_X_PAGE es ${{ env.ROW_X_PAGE }}"
+        #  echo "vars ROW_X_PAGE es ${{ vars.ROW_X_PAGE }}"
+        run: python my_script.py
