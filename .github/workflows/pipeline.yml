@@ -17,8 +17,8 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install Requirements
-        run: pip install -r requirements.txt
+      #- name: Install Requirements
+      #  run: pip install -r requirements.txt
 
       - name: Start
         env:
@@ -28,11 +28,4 @@ jobs:
           NGROK_TOKEN: ${{ env.NGROK_TOKEN }}
           ROW_X_PAGE: ${{ env.ROW_X_PAGE }}
           VIDEOG_DB: ${{ env.VIDEOG_DB }}
-        run: python main.py
-
-#BOT_API
-#GEMINI_API
-#LIMIT_USE
-#NGROK_TOKEN
-#ROW_X_PAGE
-#VIDEOG_DB
+        run: echo "ROW_X_PAGE es ${{ env.ROW_X_PAGE }}"
