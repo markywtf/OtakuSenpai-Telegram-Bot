@@ -22,12 +22,12 @@ jobs:
 
       - name: Start
         env:
-          BOT_API: ${{ secrets.BOT_API }}
-          GEMINI_API: ${{ secrets.GEMINI_API }}
-          LIMIT_USE: ${{ secrets.LIMIT_USE }}
-          NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
-          ROW_X_PAGE: ${{ secrets.ROW_X_PAGE }}
-          VIDEOG_DB: ${{ secrets.VIDEOG_DB }}
+          BOT_API: ${{ env.BOT_API }}
+          GEMINI_API: ${{ env.GEMINI_API }}
+          LIMIT_USE: ${{ env.LIMIT_USE }}
+          NGROK_TOKEN: ${{ env.NGROK_TOKEN }}
+          ROW_X_PAGE: ${{ env.ROW_X_PAGE }}
+          VIDEOG_DB: ${{ env.VIDEOG_DB }}
         run: python main.py
 
 #BOT_API
