@@ -16,9 +16,23 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip'
-          
+
       - name: Install Requirements
         run: pip install -r requirements.txt
 
       - name: Start
+        env:
+          BOT_API: ${{ secrets.BOT_API }}
+          GEMINI_API: ${{ secrets.GEMINI_API }}
+          LIMIT_USE: ${{ secrets.LIMIT_USE }}
+          NGROK_TOKEN: ${{ secrets.NGROK_TOKEN }}
+          ROW_X_PAGE: ${{ secrets.ROW_X_PAGE }}
+          VIDEOG_DB: ${{ secrets.VIDEOG_DB }}
         run: python main.py
+
+#BOT_API
+#GEMINI_API
+#LIMIT_USE
+#NGROK_TOKEN
+#ROW_X_PAGE
+#VIDEOG_DB
