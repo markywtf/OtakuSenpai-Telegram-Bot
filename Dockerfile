@@ -1,5 +1,5 @@
 # Usa una imagen base de Python
-FROM python:3.12.1
+FROM python:3.11.7
 
 # Instala screen
 RUN apt-get update && apt-get install -y screen
