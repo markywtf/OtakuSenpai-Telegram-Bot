@@ -28,4 +28,6 @@ jobs:
           NGROK_TOKEN: ${{ env.NGROK_TOKEN }}
           ROW_X_PAGE: ${{ env.ROW_X_PAGE }}
           VIDEOG_DB: ${{ env.VIDEOG_DB }}
-        run: echo "ROW_X_PAGE es ${{ env.ROW_X_PAGE }}"
+        run: |
+          echo "env ROW_X_PAGE es ${{ env.ROW_X_PAGE }}"
+          echo "vars ROW_X_PAGE es ${{ vars.ROW_X_PAGE }}"
