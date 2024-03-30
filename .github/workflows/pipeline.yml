@@ -31,4 +31,4 @@ jobs:
         #run: |
         #  echo "env ROW_X_PAGE es ${{ env.ROW_X_PAGE }}"
         #  echo "vars ROW_X_PAGE es ${{ vars.ROW_X_PAGE }}"
-        run: python my_script.py
+        run: python main.py
