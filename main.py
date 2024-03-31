@@ -180,7 +180,7 @@ def command_to_unsubscribe(message):
         unsubscribe_user(message)
 
 
-@bot.message_handler(commands=['list_admins'])
+@bot.message_handler(commands=['staff'])
 def command_list_admins(message):
     list_admins(message, bot)
     
@@ -553,7 +553,7 @@ if __name__ == '__main__':
         telebot.types.BotCommand("/add_anime", "Agregar anime a la base de datos"),
         telebot.types.BotCommand("/del_anime", "Eliminar anime de la base de datos"),
         telebot.types.BotCommand("/blacklist", "Gestión de la lista negra"),
-        telebot.types.BotCommand("/list_admins", "Listado de Administradores"),
+        telebot.types.BotCommand("/staff", "Listado del Staff del grupo"),
         telebot.types.BotCommand("/ban", "Banear a un Usuario"),
         telebot.types.BotCommand("/unban", "Desbanear a un Usuario"),
         telebot.types.BotCommand("/warn", "Advertencia para un usuario"),
