@@ -36,6 +36,7 @@ def list_admins(message, bot):
 
         if other_admins:
             message_text += f"\n└ <a href='https://t.me/{other_admins[-1].user.username}'>{other_admins[-1].custom_title}</a>\n"
+
         mods = list(users.find({"is_mod": True}))
         for i, user in enumerate(mods[:-1]):
             user_id = user['user_id']
@@ -47,7 +48,7 @@ def list_admins(message, bot):
         if mods:
             user = mods[-1]
             user_id = user['user_id']
-            print(f"fin: {user_id}")
+            get_user = bot.get_chat_member(chat_id, user_id)
             message_text += f"\n└<a href='https://t.me/{get_user.user.username}'>{get_user.user.first_name}</a>"
 
         bot.reply_to(message, message_text, parse_mode='html', disable_web_page_preview=True)
