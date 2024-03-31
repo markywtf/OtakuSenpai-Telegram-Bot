@@ -35,11 +35,24 @@ def list_admins(message, bot):
             message_text += f"\n├ <a href='https://t.me/{user.user.username}'>{user.custom_title}</a>"
 
         if other_admins:
-            message_text += f"\n└ <a href='https://t.me/{other_admins[-1].user.username}'>{other_admins[-1].custom_title}</a>"
+            message_text += f"\n└ <a href='https://t.me/{other_admins[-1].user.username}'>{other_admins[-1].custom_title}</a>\n"
+        mods = list(users.find({"is_mod": True}))
+        for i, user in enumerate(mods[:-1]):
+            user_id = user['user_id']
+            get_user = bot.get_chat_member(chat_id, user_id)
+            if i == 0:
+                message_text += f"\n🔰Colaboradores:\n├ <a href='https://t.me/{get_user.user.username}'>{get_user.user.first_name}</a>"
+            else:
+                message_text += f"\n├ <a href='https://t.me/{get_user.user.username}'>{get_user.user.first_name}</a>"
+        if mods:
+            user = mods[-1]
+            user_id = user['user_id']
+            print(f"fin: {user_id}")
+            message_text += f"\n└<a href='https://t.me/{get_user.user.username}'>{get_user.user.first_name}</a>"
 
-        bot.send_message(chat_id, message_text, parse_mode='html', disable_web_page_preview=True)
+        bot.reply_to(message, message_text, parse_mode='html', disable_web_page_preview=True)
     else:
-        bot.send_message(message.chat.id, "Este comando solo puede ser usado en grupos y en supergrupos")
+        bot.reply_to(message, "Este comando solo puede ser usado en grupos y en supergrupos")
 
 
 
