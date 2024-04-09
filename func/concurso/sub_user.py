@@ -19,7 +19,7 @@ bot = telebot.TeleBot(Token)
 
 def add_user(user_id):
     # Consulta para seleccionar el documento a actualizar
-    filter = {'contest_num': 1}
+    filter = {'contest_num': 2}
 
     # Operación de actualización para agregar dos usuarios más a la lista 'completed_by'
     update = {'$push': {'subscription': {'user': user_id}}}
@@ -31,7 +31,7 @@ def add_user(user_id):
 
 def del_user(user_id):
     # Consulta para seleccionar el documento a actualizar
-    filter = {'contest_num': 1}
+    filter = {'contest_num': 2}
 
     # Operación de actualización para agregar dos usuarios más a la lista 'completed_by'
     update = {'$pull': {'subscription': {'user': user_id}}}
@@ -59,9 +59,12 @@ def subscribe_user(message):
     user_id = message.from_user.id
     username = message.from_user.username
     found = False
+        
+    contest = contest.insert_one({'contest_num': 2})
+    print(contest)
 
+    return
     chat_member = bot.get_chat_member(-1001485529816, user_id)
-    print(chat_member)
 
     if chat_member is None:
         bot.send_message(chat_id, f"Solo los participantes de <a href='https://t.me/OtakuSenpai2020'>Otaku Senpai</a> pueden participar en el concurso.", parse_mode="html")
@@ -76,8 +79,11 @@ def subscribe_user(message):
         pass
     else:
         reg_user(user_id, username)
-    
-    for user in contest.find({'contest_num': 1}):
+
+    contest_list = None
+    contest_list = contest.find({'contest_num': 2})
+
+    for user in contest_list:
             for sub in user['subscription']:
                 if sub['user'] == user_id:
                     found = True
@@ -101,7 +107,7 @@ def unsubscribe_user(message):
     content_photo = Contest_Data.find_one({'u_id': user_id, 'type': 'photo'})
     content_text = Contest_Data.find_one({'u_id': user_id, 'type': 'text'})
 
-    for user in contest.find({'contest_num': 1}):
+    for user in contest.find({'contest_num': 2}):
             for sub in user['subscription']:
                 if sub['user'] == user_id:
                     found = True
