@@ -60,8 +60,8 @@ def subscribe_user(message):
     username = message.from_user.username
     found = False
         
-    contest = contest.insert_one({'contest_num': 2})
-    print(contest)
+    contesttest = contest.insert_one({'contest_num': 2})
+    print(contesttest)
 
     return
     chat_member = bot.get_chat_member(-1001485529816, user_id)
