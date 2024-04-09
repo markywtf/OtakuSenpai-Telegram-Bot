@@ -1,5 +1,6 @@
 import os
 import re
+import pytz
 import telebot
 import datetime
 import google.generativeai as genai
@@ -36,6 +37,11 @@ from func.reverse import reverse
 from func.afk import set_afk, get_afk
 from func.set_bio import set_description
 from func.useControl import useControlMongo
+#Scheduler
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+#YouTube
+from func.youtube.youtube_get_video import get_yt_videos
 #VideoGames
 from func.videogamedb.api_videogame import search_game
 #Anime and manga gestion
@@ -114,6 +120,10 @@ def send_sticker_info(message):
 @bot.message_handler(commands=['del_sticker'])
 def del_sticker_command(message):
     sticker_del(message)
+
+@bot.message_handler(commands=['get_videos'])
+def get_yt_command(message):
+    get_yt_videos(message)
 
 # Definimos una función que será llamada cuando ocurra un cambio en los miembros del grupo
 @bot.message_handler(content_types=['new_chat_members'])
@@ -293,8 +303,27 @@ def res_con_command(message):
 def res_con_command(message):
     contest_event(message)
 
-#@bot.message_handler(commands=['send_spm'])
-#def send_msg_contest(message):
+@bot.message_handler(commands=['send_spm'])
+def send_msg_contest(message):
+    msg = """Hello caranalgas!
+Miren miren aquí les dejo el calendario de Otaku Senpai para que estén al tanto del programa una vez empiece. Pueden agregarlo a cualquiera de sus dispositivos.
+
+Una vez descargado el archivo basta con abrirlo con su calendario favorito y tendrán la cartelera con información detallada de cada episodio, buajajaja mejor no podría ser. 
+
+También quiero decir que yo tendré esta información también pero más adelante no desesperes cabeza de calabaza. Un saludo que ya me voy!"""
+    import PIL.Image 
+    markup = InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    "🗓️ Obtener Calendario",
+                                    url="https://calendar.google.com/calendar/ical/2009b62806cd823e1e0bf72820cb412a92ffbf9928c3166ed0c9ea283951f87a%40group.calendar.google.com/public/basic.ics"
+                                )
+                            ]
+                        ]
+                    )
+    with PIL.Image.open(f'data/833shots_so.jpg') as img:
+        bot.send_photo(message.chat.id, img, msg, message_thread_id=251766, reply_markup=markup)
 #    msg = """
 #Hola mi amor, ya se que el concurso tuvo que terminar antes pero no se puede hacer nada es culpa de @YosvelPG.
 #De todas formas te escribo para avisarte que mañana si cierra la inscripción del concurso y el sábado ya anuncio los ganadores.
@@ -446,8 +475,6 @@ def command_unmute_user(message):
         bot.reply_to(message, f"No se pudo ejecutar esta acción.")
 
 
-#scheduler.add_job(calvicia, CronTrigger(hour=hour, minute=minute, second=seconds, timezone=tz), args=(-1001664356911, num))
-
 @bot.message_handler(content_types=['photo'])
 def recive_photo_contest(message):
     contest_photo(message, bot)
@@ -529,7 +556,13 @@ def handle_message(message):
         akira_ai(message)
 
         get_afk(bot, message)
-                
+
+#Horarios
+scheduler = BackgroundScheduler()
+tz = pytz.timezone('Cuba')
+scheduler.add_job(get_yt_videos, CronTrigger(minute='*/30', timezone=tz), args=(None, True))
+#scheduler.add_job(calvicia, CronTrigger(hour=hour, minute=minute, second=seconds, timezone=tz), args=(-1001664356911, num))
+scheduler.start()
 
 if __name__ == '__main__':
     ngrok_token = os.getenv('NGROK_TOKEN')
