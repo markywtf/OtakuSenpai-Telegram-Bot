@@ -59,11 +59,7 @@ def subscribe_user(message):
     user_id = message.from_user.id
     username = message.from_user.username
     found = False
-        
-    contesttest = contest.insert_one({'contest_num': 2})
-    print(contesttest)
 
-    return
     chat_member = bot.get_chat_member(-1001485529816, user_id)
 
     if chat_member is None:
@@ -80,7 +76,6 @@ def subscribe_user(message):
     else:
         reg_user(user_id, username)
 
-    contest_list = None
     contest_list = contest.find({'contest_num': 2})
 
     for user in contest_list:
