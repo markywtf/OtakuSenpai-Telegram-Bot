@@ -10,3 +10,5 @@ func/concurso/*.jpg
 stealsticker.png
 stealsticker.tgs
 stealsticker.webm
+func/youtube/credentials.json
+func/youtube/youtube_token.pickle
