@@ -9,13 +9,9 @@ from telebot.types import ReactionTypeEmoji
 
 load_dotenv()
 
-# Conectar a la base de datos
-db = get_db()
-users = db.users
-Admins = db.admins
-
 #Importamos los datos necesarios para el bot
 Token = os.getenv('BOT_API')
+SAUCENAO = os.getenv('SAUCENAO')
 bot = telebot.TeleBot(Token)
 
 
@@ -32,7 +28,7 @@ def reverse(message):
 
     url = "https://saucenao.com/search.php"
     params = {
-        "api_key": "ec9eb845f8d33c918976c7c03fbe5081867ed947",
+        "api_key": SAUCENAO,
         "output_type": "2",
         "testmode": "1"
     }
