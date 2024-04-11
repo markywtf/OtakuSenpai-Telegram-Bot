@@ -297,7 +297,7 @@ def endPollAdd(message, data):
     
 @bot.message_handler(commands=['subs'])
 def res_con_command(message):
-    res = contest.find_one({'contest_num': 1})
+    res = contest.find_one({'contest_num': 2})
     text = "Suscriptores:\n"
     for i, val in enumerate(res['subscription']):
         i = i + 1
